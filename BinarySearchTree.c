@@ -14,13 +14,13 @@ void delete_BinarySearchTree(BinarySearchTree* btree){
 }
 
 BinaryTreeNode* BinarySearchTree_find_parent_node(BinaryTreeNode* tnode, int key){
-    if(tnode->data.id < key){
+    if(tnode->data.key < key){
         if(tnode->right == NULL){
             return tnode;
         }else{
             return BinarySearchTree_find_parent_node(tnode->right, key);
         }
-    }else if(tnode->data.id > key){
+    }else if(tnode->data.key > key){
         if(tnode->left == NULL){
             return tnode;
         }else{
@@ -31,18 +31,18 @@ BinaryTreeNode* BinarySearchTree_find_parent_node(BinaryTreeNode* tnode, int key
     }
 }
 
-BinaryTreeNode* BinarySearchTree_add(BinarySearchTree* btree, ADT elem){
+BinaryTreeNode* BinarySearchTree_add(BinarySearchTree* btree, Book elem){
     BinaryTreeNode* node = new_BinaryTreeNode(elem, NULL, NULL);
     if(btree->size == 0){ 
         btree->root = node;
         btree->size = 1;
     }else{
         BinaryTreeNode* p = BinarySearchTree_find_parent_node(btree->root, elem.key); //..
-        if(p->data.id > elem.key){
+        if(p->data.key > elem.key){
             p->left = node;
             node->parent = p;
             btree->size += 1;
-        }else if(p->data.id < elem.key){
+        }else if(p->data.key < elem.key){
             p->right = node;
             node->parent = p;
             btree->size +=1;
@@ -56,9 +56,9 @@ BinaryTreeNode* BinarySearchTree_add(BinarySearchTree* btree, ADT elem){
 BinaryTreeNode* BinarySearchTree_find_node(BinaryTreeNode* tnode, int key){
     if(tnode == NULL){
         return NULL;
-    }else if( tnode->data.id < key){
+    }else if( tnode->data.key < key){
         return BinarySearchTree_find_node(tnode->right, key);
-    }else if( tnode->data.id > key){
+    }else if( tnode->data.key > key){
         return BinarySearchTree_find_node(tnode->left, key);
     }else{ // tnode->data.key == key
         return tnode;

@@ -1,25 +1,32 @@
-#include <stdio.h>
-#include <math.h>
+#include<stdio.h>
+#include "BinarySearchTree.h"
+
 int main(){
+    ADT a;
+    BinarySearchTree* btree = new_BinarySearchTree();
+    BinaryTreeNode* n;
 
-    printf("\t\t\t###########################################################################");
-    printf("\n\t\t\t############                                                   ############");
-    printf("\n\t\t\t############      Library management System Project in C       ############");
-    printf("\n\t\t\t############                                                   ############");
-    printf("\n\t\t\t###########################################################################");
-    printf("\n\t\t\t---------------------------------------------------------------------------\n");
-    printf("\n\t\t\t----------------------------------------------------------------------------");
+    a.key = 10;
+    BinarySearchTree_add(btree, a);
+    a.key = 5;
+    BinarySearchTree_add(btree, a);
+    a.key = 15;
+    BinarySearchTree_add(btree, a);
+    a.key = 12;
+    BinarySearchTree_add(btree, a);
+    a.key = 1;
+    BinarySearchTree_add(btree, a);
+    a.key = 30;
+    BinarySearchTree_add(btree, a);
 
-    printf("\n\t\t\t 1.insert a new book in libary Gallery with book details ");
-    //scanf("%###",$#####)
-    printf("\n\t\t\t 2.Remove a book for this Gallery");
-    // scanf("%###",$####);
-    printf("\n\t\t\t 3.Want to borrow a book from libary");
-    // scanf("%###",$####);
-    printf("\n\t\t\t 4.return borrowing book");
-    // scanf("%###",$####);
-    printf("\n\t\t\t 5.show borrow records");
-    // scanf("%###",$####);
+    // BinarySearchTree_delete(btree, n);
 
+    // delete_BinarySearchTree(btree);
+
+
+    a= BinarySearchTree_find(btree, 12);
+    printf("%d",a.key);
+
+    return 0;
 
 }

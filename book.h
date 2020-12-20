@@ -3,6 +3,7 @@
 #define book_h
 
 typedef struct{
+    int key;
     int id;
     char title;
     char author;
