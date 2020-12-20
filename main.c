@@ -4,10 +4,11 @@
 int main()
 {
 
-    char option,for_add_more_book;
+    char option, do_again;
     Book a;
     BinarySearchTree *btree = new_BinarySearchTree();
     BinaryTreeNode *n;
+    BinaryTreeNode *return_node_for_delete;
     printf("\t\t\t###########################################################################");
     printf("\n\t\t\t############                                                   ############");
     printf("\n\t\t\t############      Library management System Project in C       ############");
@@ -25,7 +26,7 @@ int main()
     scanf("%c", &option);
     switch (option)
     {
-    case '1':   /*for insert new Book*/
+    case '1': /*for insert new Book*/
         do
         {
             printf("\n\t\t\tinsert a new book in libary Gallery with book details ");
@@ -39,12 +40,26 @@ int main()
             printf("\n\t\t\t---------------------------------------------------------------------------\n");
             printf("\nDo you want to add more book press 1");
             printf("\nOr not prss: 2   ");
-            scanf("%s", &for_add_more_book);
-        } while (for_add_more_book=='1');
-
+            scanf("%s", &do_again);
+        } while (do_again == '1');
+        //make a balance btree........... for make a this btree for balance
         break;
-    case '2':
-        /* code */
+
+    case '2': //Clear inventory: Remove books of one ID from the system.
+        do
+        {
+        printf("\n\t\t\t 2.Remove a book for this Gallery");
+        printf("\n\t\t\t---------------------------------------------------------------------------\n");
+        printf("\nEnter Book id:");
+        scanf("%d", a.key);
+        return_node_for_delete= BinarySearchTree_find_Node(btree, a.key);
+        BinarySearchTree_delete(btree,return_node_for_delete);
+        printf("\n\t\t\t---------------------------------------------------------------------------\n");
+            printf("\nDo you want to delete more book press 1");
+            printf("\nOr not prss: 2   ");
+            scanf("%s", &do_again);
+        } while (do_again == '1');        
+        //make a balance btree............for make a this btree for balance 
         break;
     case '3':
         /* code */
