@@ -5,8 +5,8 @@
 typedef struct{
     int key;
     int id;
-    char title;
-    char author;
+    char title[20];
+    char author[20];
     int existing_stocks;
     int total;
 }Book;

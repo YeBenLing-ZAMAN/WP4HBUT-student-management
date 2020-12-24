@@ -15,5 +15,6 @@ BinaryTreeNode* BinarySearchTree_add(BinarySearchTree* btree, Book elem);
 Book BinarySearchTree_find(BinarySearchTree* btree, int key);
 Book BinarySearchTree_find_min(BinarySearchTree* btree);
 Book BinarySearchTree_find_max(BinarySearchTree* btree);
+Book BinarySearchTree_find_for_delete(BinarySearchTree* btree, int key);
 void BinarySearchTree_delete(BinarySearchTree* btree, BinaryTreeNode* node);
 #endif

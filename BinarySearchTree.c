@@ -66,13 +66,26 @@ BinaryTreeNode* BinarySearchTree_find_node(BinaryTreeNode* tnode, int key){
 }
 
 Book BinarySearchTree_find(BinarySearchTree* btree, int key){
-    Book a;
+    Book b;
     BinaryTreeNode* node = BinarySearchTree_find_node(btree->root, key);
     if(node != NULL){
         return node->data;
     }else{
-        a.key = -1;
-        return a;
+        b.key = -1;
+        return b;
+    }
+}
+
+Book BinarySearchTree_find_for_delete(BinarySearchTree* btree, int key){
+    Book b;
+    BinaryTreeNode* node = BinarySearchTree_find_node(btree->root, key);
+    if(node != NULL){
+        BinarySearchTree_delete(btree, node);
+        b.key = 1;
+        return b;
+    }else{
+        b.key = -1;
+        return b;
     }
 }
 
@@ -135,7 +148,7 @@ void BinarySearchTree_delete(BinarySearchTree* btree, BinaryTreeNode* node){
         free(node);
         btree->size -= 1;
 
-    //if the node does not have a left child
+       //if the node does not have a left child
     }else if(node->left == NULL){
         if(p->left == node){
             p->left = node->right;
