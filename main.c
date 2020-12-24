@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include "BinarySearchTree.h"
 #include "index.c"
-#include"student.h"
-#include"book.h"
+#include "student.h"
+#include "book.h"
 
 void book_insert_record(BinarySearchTree *booktree,BinaryTreeNode *bt){
     Book b1;
@@ -20,6 +20,23 @@ void book_insert_record(BinarySearchTree *booktree,BinaryTreeNode *bt){
     BinarySearchTree_add(booktree,b1);
 
     forfirst++;
+}
+
+
+void book_see_record(BinarySearchTree *booktree){
+    Book b1,return_book_information;
+    printf("Enter book key (maxmimun six digits)\n");
+    scanf("%s", b1.key);  
+    return_book_information=BinarySearchTree_find(booktree,b1.key);
+    if(return_book_information.key!=-1) {
+    printf("book key :\t\t%d\n",return_book_information.key);
+    printf("Book title :\t\t%s\n",return_book_information.title);
+    printf("Book author :\t\t%s\n",return_book_information.author);
+    printf("Book existing_stocks :\t\t%d\n",return_book_information.existing_stocks);
+    printf("Book total :\t\t%d\n",return_book_information.total);
+    }
+    else 
+    printf("Book is NOT found!!!! \n");
 }
 
 
@@ -46,9 +63,9 @@ void book_section(BinarySearchTree *booktree,BinaryTreeNode *bt)
         case 1:
             book_insert_record(booktree,bt);
             break;
-        // case 2:
-        //     book_see_record();
-        //     break;
+        case 2:
+            book_see_record(booktree);
+            break;
         // case 3:
         //     book_delete_record();
         //     break;
