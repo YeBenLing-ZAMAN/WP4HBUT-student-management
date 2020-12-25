@@ -13,14 +13,14 @@ void book_insert_record(BinarySearchTree *booktree, BinaryTreeNode *bt)
     Book b1;
     static int forfirst = 0;
     printf("Enter  book title (Space not allowed)\n");
-    scanf("%s", b1.title);
-    printf("Enter book key (maxmimun six digits)\n");
-    scanf("%s", b1.key);
+    scanf("%s", &b1.title);
+    printf("Enter book ID (maxmimun six digits)\n");
+    scanf("%d", &b1.key);
     printf("Enter book Author name (space not allowed)\n)");
-    scanf("%s", b1.author);
+    scanf("%s", &b1.author);
 
     if (forfirst == 0)
-        bt = BinarySearchTree_add(booktree, b1); // laoshi kinto ekta requirment dichilo......
+        bt = BinarySearchTree_add(booktree, b1); 
     else
         BinarySearchTree_add(booktree, b1);
 
@@ -64,7 +64,7 @@ void delete_book_record(BinarySearchTree *booktree)
     }
 }
 
-void book_section(BinarySearchTree *booktree, BinaryTreeNode *bt)
+void book_section(BinarySearchTree *booktree, BinaryTreeNode *bt,ArrList *list)
 {
     int a;
     char c;
@@ -93,7 +93,7 @@ void book_section(BinarySearchTree *booktree, BinaryTreeNode *bt)
             delete_book_record(booktree);
             break;
         case 4:
-            // main_manu();
+            main_manu(booktree, bt, list);
             break;
         default:
             printf("enter correct value\n");
@@ -218,15 +218,17 @@ void search_student_by_book_ID(ArrList *list)
     }
 }
 
+void delete_all_student(ArrList *list){
+    ArrList_clear(list);
+}
 
 
 
 
-void student_section(ArrList *list)
+void student_section(BinarySearchTree *booktree, BinaryTreeNode *bt,ArrList *list)
 {
     int a;
-    char c, nam[20];
-    //STUDENT *S;
+    char c;
     do
     {
 
@@ -240,6 +242,7 @@ void student_section(ArrList *list)
         printf("\t\t\tPress <3> To delete record(By ID)d\n");
         printf("\t\t\tPress <4> To search Student(By ID)\n");
         printf("\t\t\tPress <5> To search_student(By Book Borrow ID)\n");
+        printf("\t\t\tPress <6> To DELETE ALL student Record\n");
         printf("\t\t\tPress <6> Back to main menu\n");
         scanf("%d", &a);
         switch (a)
@@ -260,7 +263,9 @@ void student_section(ArrList *list)
         case 5:
             search_student_by_book_ID(list);
         case 6:
-            main_manu();
+            delete_all_student(list);
+        case 7:
+            main_manu(booktree, bt, list);
             break;
         default:
             printf("enter correct value\n");
@@ -354,10 +359,10 @@ void main_manu(BinarySearchTree *booktree, BinaryTreeNode *bt, ArrList *list)
         switch (n)
         {
         case 1:
-            student_section(list);
+            student_section(booktree, bt, list);  // done 100%
             break;
         case 2:
-            book_section(booktree, bt);
+            book_section(booktree, bt, list);
             break;
         case 3:
             booK_issue_section(booktree, bt);
