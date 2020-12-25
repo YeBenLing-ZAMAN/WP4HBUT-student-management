@@ -64,11 +64,15 @@ void delete_book_record(BinarySearchTree *booktree)
     }
 }
 
-see_all_book_records(BinarySearchTree *booktree){
+void see_all_book_records(BinarySearchTree *booktree){
     printf("\n");
     printf("\tBook ID \tBook Title \t\tBook Author\t\tExisting Stocks\n");
     printf("-----------------------------------------------------------------------------------------------------\n");
     preorder_traversal(booktree->root);
+}
+
+void delete_all_book(BinarySearchTree *booktree){
+     delete_BinaryTree(booktree->root);
 }
 
 void book_section(BinarySearchTree *booktree, BinaryTreeNode *bt,ArrList *list)
@@ -105,7 +109,7 @@ void book_section(BinarySearchTree *booktree, BinaryTreeNode *bt,ArrList *list)
             delete_book_record(booktree);
             break;
         case 5:
-            delete_all_book();
+            delete_all_book(booktree);
             break;
         case 6:
             main_manu(booktree, bt, list);
