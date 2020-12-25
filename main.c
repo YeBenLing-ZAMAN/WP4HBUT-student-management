@@ -142,11 +142,31 @@ void student_see_record(ArrList *list)
     }
     printf("\n");
 }
-void delete_student_record(ArrList *list){
-
+void delete_student_record(ArrList *list)
+{
+    int a, flag = -1;
+    STUDENT b;
+    printf("Enter Student ID : ");
+    scanf("%d", &a);
+    for (int i = 0; i < ArrList_size(list); ++i)
+    {
+        b = ArrList_get(list, i);
+        if (b.id == a)
+        {
+            flag = i;
+        }
+    }
+    if (flag != -1)
+    {
+        ArrList_erase(list, flag);
+        printf("deletion sucessful\n");
+    }
+    else
+    {
+        printf("ID id not Found\n");
+    }
+    
 }
-
-
 
 void search_student(ArrList *list)
 {
@@ -154,24 +174,53 @@ void search_student(ArrList *list)
     STUDENT b;
     printf("Enter Student ID\n");
     scanf("%d", &a);
-       for (int i = 0; i < ArrList_size(list); ++i)
+    for (int i = 0; i < ArrList_size(list); ++i)
     {
         b = ArrList_get(list, i);
-        if(b.id==a){
-        printf("\tStdent id\t\tStudent Name\t\t\t Borrow Book ID\t\tGender\n");
-        printf("-----------------------------------------------------------------------------------------------------\n");
-        printf("\t%-10d\t\t", b.id);
-        printf("%-20s\t\t", b.name);
-        printf(" %-9d\t\t", b.book_id);
-        if (b.gender == 1)
-            printf("male");
-        else
-            printf("female");
-        printf("\n");
+        if (b.id == a)
+        {
+            printf("\tStdent id\t\tStudent Name\t\t\t Borrow Book ID\t\tGender\n");
+            printf("-----------------------------------------------------------------------------------------------------\n");
+            printf("\t%-10d\t\t", b.id);
+            printf("%-20s\t\t", b.name);
+            printf(" %-9d\t\t", b.book_id);
+            if (b.gender == 1)
+                printf("male");
+            else
+                printf("female");
+            printf("\n");
         }
-
     }
 }
+
+void search_student_by_book_ID(ArrList *list)
+{
+    int a;
+    STUDENT b;
+    printf("Enter Book ID\n");
+    scanf("%d", &a);
+    for (int i = 0; i < ArrList_size(list); ++i)
+    {
+        b = ArrList_get(list, i);
+        if (b.book_id == a)
+        {
+            printf("\tBorrow Book ID\t\tStdent id\t\t\t Student Name\t\tGender\n");
+            printf("-----------------------------------------------------------------------------------------------------\n");
+            printf("\t%-10d\t\t", b.book_id);
+            printf("%-20s\t\t", b.id);
+            printf(" %-9d\t\t", b.name);
+            if (b.gender == 1)
+                printf("male");
+            else
+                printf("female");
+            printf("\n");
+        }
+    }
+}
+
+
+
+
 
 void student_section(ArrList *list)
 {
@@ -188,9 +237,10 @@ void student_section(ArrList *list)
 
         printf("\t\t\tPress <1> To insert Student Record\n");
         printf("\t\t\tPress <2> To see Student Record\n");
-        printf("\t\t\tPress <3> To delete record\n");
-        printf("\t\t\tPress <4> To search Student(by ID)\n");
-        printf("\t\t\tPress <5> Back to main menu\n");
+        printf("\t\t\tPress <3> To delete record(By ID)d\n");
+        printf("\t\t\tPress <4> To search Student(By ID)\n");
+        printf("\t\t\tPress <5> To search_student(By Book Borrow ID)\n");
+        printf("\t\t\tPress <6> Back to main menu\n");
         scanf("%d", &a);
         switch (a)
         {
@@ -208,6 +258,8 @@ void student_section(ArrList *list)
             search_student(list);
             break;
         case 5:
+            search_student_by_book_ID(list);
+        case 6:
             main_manu();
             break;
         default:
