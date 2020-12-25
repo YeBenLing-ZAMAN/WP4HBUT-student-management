@@ -12,6 +12,8 @@ typedef struct{
 BinarySearchTree* new_BinarySearchTree();
 void delete_BinarySearchTree(BinarySearchTree* btree);
 BinaryTreeNode* BinarySearchTree_add(BinarySearchTree* btree, Book elem);
+BinaryTreeNode* BinarySearchTree_find_parent_node(BinaryTreeNode* tnode, int key);
+BinaryTreeNode* BinarySearchTree_find_node(BinaryTreeNode* tnode, int key);
 Book BinarySearchTree_find(BinarySearchTree* btree, int key);
 Book BinarySearchTree_find_min(BinarySearchTree* btree);
 Book BinarySearchTree_find_max(BinarySearchTree* btree);

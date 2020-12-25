@@ -1,11 +1,13 @@
+#ifndef student_h
+#define student_h
 
-#ifndef book_h
-#define book_h
-
+//The information of students details 
 typedef struct{
-    int key;
     int id;
     char name[20];
-}STUDENT;
+    int book_id;
+    int gender; //1 for male, 0 for female
+    
+} STUDENT;
 
 #endif

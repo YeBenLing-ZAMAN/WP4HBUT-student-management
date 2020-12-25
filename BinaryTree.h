@@ -2,6 +2,7 @@
 #define BinaryTree_h
 
 #include"book.h"
+#include"student.h"
 
 typedef struct BinaryTreeNode{
     struct BinaryTreeNode* parent;
