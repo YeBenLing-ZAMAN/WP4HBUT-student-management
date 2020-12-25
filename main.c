@@ -10,21 +10,20 @@ void main_manu(BinarySearchTree *booktree, BinaryTreeNode *bt, ArrList *list);
 
 void book_insert_record(BinarySearchTree *booktree, BinaryTreeNode *bt)
 {
-    Book b1;
-    static int forfirst = 0;
-    printf("Enter  book title (Space not allowed)\n");
-    scanf("%s", &b1.title);
-    printf("Enter book ID (maxmimun six digits)\n");
-    scanf("%d", &b1.key);
-    printf("Enter book Author name (space not allowed)\n)");
-    scanf("%s", &b1.author);
-
-    if (forfirst == 0)
-        bt = BinarySearchTree_add(booktree, b1); 
-    else
-        BinarySearchTree_add(booktree, b1);
-
-    forfirst++;
+    int x;
+    Book b;
+    do{
+        printf("Enter book ID (maxmimun six digits)\n");
+        scanf("%d", &b.key);
+        printf("Enter  book title (Space not allowed)\n");
+        scanf("%s", &b.title);
+        printf("Enter book Author name (space not allowed)\n)");
+        scanf("%s", &b.author);
+        b.existing_stocks=1;
+        BinarySearchTree_add(booktree, b);
+        printf("Enter any intger number for continuing insertion\n");
+        scanf("%d", &x);
+    } while (x != 1);
 }
 
 void book_see_record(BinarySearchTree *booktree)
@@ -219,7 +218,7 @@ void search_student_by_book_ID(ArrList *list)
 }
 
 void delete_all_student(ArrList *list){
-    ArrList_clear(list);
+    ArrList_clear(list);  // clear all the student information from the array list 
 }
 
 
