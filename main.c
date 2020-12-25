@@ -32,34 +32,36 @@ void book_searching(BinarySearchTree *booktree)
     printf("Enter book key (maxmimun six digits)\n");
     scanf("%d", b1.key);
     return_book_information = BinarySearchTree_find(booktree, b1.key);
-    if (return_book_information.key != -1)
+    if (return_book_information.key == -1)
     {
+        printf("Book is NOT found!!!! \n");
+    }
+    else{
         printf("book key :\t\t%d\n", return_book_information.key);
         printf("Book title :\t\t%s\n", return_book_information.title);
         printf("Book author :\t\t%s\n", return_book_information.author);
         printf("Book existing_stocks :\t\t%d\n", return_book_information.existing_stocks);
         //printf("Book total :\t\t%d\n", return_book_information.total);
     }
-    else
-        printf("Book is NOT found!!!! \n");
 }
 
 void delete_book_record(BinarySearchTree *booktree)
 {
-    Book b1, return_book_information;
-    printf("Enter book key (maxmimun six digits)\n");
-    scanf("%s", b1.key);
+    Book b, return_book_information;
+    BinaryTreeNode *delete_node_address;  delete_node_address =NULL;   
+    printf("Enter Book key (maxmimun six digits)\n");
+    scanf("%d", b.key);
 
-    BinaryTreeNode *delete_node_address = BinarySearchTree_find_node(booktree->root, b1.key);
-    if (delete_node_address != NULL)
+    delete_node_address = BinarySearchTree_find_node(booktree->root, b.key);
+    if (delete_node_address == NULL)
     {
-        // node address founded
-        BinarySearchTree_delete(booktree, delete_node_address); // laoshi's 1 requirment left
+        // node address Not founded
+        printf("Book is not Found by this id : %d",b.key);
     }
     else
     {
         // node is not here
-        printf("There has no same ID book in the library");
+        BinarySearchTree_delete(booktree,delete_node_address);
     }
 }
 
@@ -77,7 +79,7 @@ void book_section(BinarySearchTree *booktree, BinaryTreeNode *bt,ArrList *list)
 
         printf("\t\t\tPress <1> To insert record\n");
         printf("\t\t\tPress <2> To see book record/details(By book ID)\n");
-        printf("\t\t\tPress <3> To delete record\n");
+        printf("\t\t\tPress <3> To delete Book record (with all Existing stocks)\n");
         printf("\t\t\tPress <4> Back to Main Menu\n");
         scanf("%d", &a);
         switch (a)
