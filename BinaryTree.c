@@ -23,7 +23,11 @@ void preorder_traversal(BinaryTreeNode* t){
     if(t == NULL){
         return;
     }
-    printf("%d ", t->data.key);
+    printf("\t%-8d\t", t->data.key);
+    printf("%-20s\t", t->data.title);
+    printf("%-20s\t", t->data.author);
+    printf(" %-9d\t", t->data.existing_stocks);
+    printf("\n");
     preorder_traversal(t->left);
     preorder_traversal(t->right);
 }

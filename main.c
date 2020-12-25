@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "BinarySearchTree.h"
-//#include "index.c"
 #include "student.h"
 #include "book.h"
 #include "student.h"
@@ -65,6 +64,13 @@ void delete_book_record(BinarySearchTree *booktree)
     }
 }
 
+see_all_book_records(BinarySearchTree *booktree){
+    printf("\n");
+    printf("\tBook ID \tBook Title \t\tBook Author\t\tExisting Stocks\n");
+    printf("-----------------------------------------------------------------------------------------------------\n");
+    preorder_traversal(booktree->root);
+}
+
 void book_section(BinarySearchTree *booktree, BinaryTreeNode *bt,ArrList *list)
 {
     int a;
@@ -79,8 +85,10 @@ void book_section(BinarySearchTree *booktree, BinaryTreeNode *bt,ArrList *list)
 
         printf("\t\t\tPress <1> To insert record\n");
         printf("\t\t\tPress <2> To see book record/details(By book ID)\n");
-        printf("\t\t\tPress <3> To delete Book record (with all Existing stocks)\n");
-        printf("\t\t\tPress <4> Back to Main Menu\n");
+        printf("\t\t\tPress <3> To see all Book records");
+        printf("\t\t\tPress <4> To delete Book record (with all Existing stocks)\n");
+        printf("\t\t\tPress <5> To DELETE ALL the BOOKS information for program\n");
+        printf("\t\t\tPress <6> Back to Main Menu\n");
         scanf("%d", &a);
         switch (a)
         {
@@ -91,9 +99,15 @@ void book_section(BinarySearchTree *booktree, BinaryTreeNode *bt,ArrList *list)
             book_searching(booktree);
             break;
         case 3:
-            delete_book_record(booktree);
+            see_all_book_records(booktree);
             break;
         case 4:
+            delete_book_record(booktree);
+            break;
+        case 5:
+            delete_all_book();
+            break;
+        case 6:
             main_manu(booktree, bt, list);
             break;
         default:
