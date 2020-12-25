@@ -47,7 +47,7 @@ BinaryTreeNode* BinarySearchTree_add(BinarySearchTree* btree, Book elem){
             node->parent = p;
             btree->size +=1;
         }else{
-            p->data = elem;
+            p->data.existing_stocks++;
         }
     }
     return node;

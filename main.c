@@ -26,11 +26,11 @@ void book_insert_record(BinarySearchTree *booktree, BinaryTreeNode *bt)
     } while (x != 1);
 }
 
-void book_see_record(BinarySearchTree *booktree)
+void book_searching(BinarySearchTree *booktree)
 {
     Book b1, return_book_information;
     printf("Enter book key (maxmimun six digits)\n");
-    scanf("%s", b1.key);
+    scanf("%d", b1.key);
     return_book_information = BinarySearchTree_find(booktree, b1.key);
     if (return_book_information.key != -1)
     {
@@ -38,7 +38,7 @@ void book_see_record(BinarySearchTree *booktree)
         printf("Book title :\t\t%s\n", return_book_information.title);
         printf("Book author :\t\t%s\n", return_book_information.author);
         printf("Book existing_stocks :\t\t%d\n", return_book_information.existing_stocks);
-        printf("Book total :\t\t%d\n", return_book_information.total);
+        //printf("Book total :\t\t%d\n", return_book_information.total);
     }
     else
         printf("Book is NOT found!!!! \n");
@@ -76,7 +76,7 @@ void book_section(BinarySearchTree *booktree, BinaryTreeNode *bt,ArrList *list)
         printf(".........................\n\n");
 
         printf("\t\t\tPress <1> To insert record\n");
-        printf("\t\t\tPress <2> To see book record/details\n");
+        printf("\t\t\tPress <2> To see book record/details(By book ID)\n");
         printf("\t\t\tPress <3> To delete record\n");
         printf("\t\t\tPress <4> Back to Main Menu\n");
         scanf("%d", &a);
@@ -86,7 +86,7 @@ void book_section(BinarySearchTree *booktree, BinaryTreeNode *bt,ArrList *list)
             book_insert_record(booktree, bt);
             break;
         case 2:
-            book_see_record(booktree);
+            book_searching(booktree);
             break;
         case 3:
             delete_book_record(booktree);
