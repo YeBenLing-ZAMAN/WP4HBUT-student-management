@@ -376,10 +376,10 @@ void Return_Book(BinarySearchTree *booktree, ArrList *list){
         if (s.id == a)
         {
             if(s.book_id!=0){
-                // book=BinarySearchTree_find_node(booktree->root,s.book_id);
-                // book->data.existing_stocks++;
-                // s.book_id = 0;
-                // printf("Book Successfully retuned\n");
+                book=BinarySearchTree_find_node(booktree->root,s.book_id);
+                book->data.existing_stocks++;
+                s.book_id = 0;
+                printf("Book Successfully retuned\n");
             }
             else{
                 printf("you haven't any book due\n");
