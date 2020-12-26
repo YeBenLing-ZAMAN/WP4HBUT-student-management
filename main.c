@@ -11,14 +11,15 @@ void book_insert_record(BinarySearchTree *booktree, BinaryTreeNode *bt)
 {
     int x;
     Book b;
-    do{
+    do
+    {
         printf("Enter book ID (maxmimun six digits)\n");
         scanf("%d", &b.key);
         printf("Enter  book title (Space not allowed)\n");
         scanf("%s", &b.title);
         printf("Enter book Author name (space not allowed)\n)");
         scanf("%s", &b.author);
-        b.existing_stocks=1;
+        b.existing_stocks = 1;
         BinarySearchTree_add(booktree, b);
         printf("Enter any intger number for continuing insertion\n");
         scanf("%d", &x);
@@ -29,13 +30,14 @@ void book_searching(BinarySearchTree *booktree)
 {
     Book b1, return_book_information;
     printf("Enter book key (maxmimun six digits)\n");
-    scanf("%d", b1.key);
+    scanf("%d", &b1.key);
     return_book_information = BinarySearchTree_find(booktree, b1.key);
     if (return_book_information.key == -1)
     {
         printf("Book is NOT found!!!! \n");
     }
-    else{
+    else
+    {
         printf("book key :\t\t%d\n", return_book_information.key);
         printf("Book title :\t\t%s\n", return_book_information.title);
         printf("Book author :\t\t%s\n", return_book_information.author);
@@ -47,35 +49,38 @@ void book_searching(BinarySearchTree *booktree)
 void delete_book_record(BinarySearchTree *booktree)
 {
     Book b, return_book_information;
-    BinaryTreeNode *delete_node_address;  delete_node_address =NULL;   
+    BinaryTreeNode *delete_node_address;
+    delete_node_address = NULL;
     printf("Enter Book key (maxmimun six digits)\n");
-    scanf("%d", b.key);
+    scanf("%d", &b.key);
 
     delete_node_address = BinarySearchTree_find_node(booktree->root, b.key);
     if (delete_node_address == NULL)
     {
         // node address Not founded
-        printf("Book is not Found by this id : %d",b.key);
+        printf("Book is not Found by this id : %d", b.key);
     }
     else
     {
         // node is not here
-        BinarySearchTree_delete(booktree,delete_node_address);
+        BinarySearchTree_delete(booktree, delete_node_address);
     }
 }
 
-void see_all_book_records(BinarySearchTree *booktree){
+void see_all_book_records(BinarySearchTree *booktree)
+{
     printf("\n");
     printf("\tBook ID \tBook Title \t\tBook Author\t\tExisting Stocks\n");
     printf("-----------------------------------------------------------------------------------------------------\n");
     preorder_traversal(booktree->root);
 }
 
-void delete_all_book(BinarySearchTree *booktree){
-     delete_BinaryTree(booktree->root);
+void delete_all_book(BinarySearchTree *booktree)
+{
+    delete_BinaryTree(booktree->root);
 }
 
-void book_section(BinarySearchTree *booktree, BinaryTreeNode *bt,ArrList *list)
+void book_section(BinarySearchTree *booktree, BinaryTreeNode *bt, ArrList *list)
 {
     int a;
     char c;
@@ -184,7 +189,6 @@ void delete_student_record(ArrList *list)
     {
         printf("ID id not Found\n");
     }
-    
 }
 
 void search_student(ArrList *list)
@@ -237,14 +241,12 @@ void search_student_by_book_ID(ArrList *list)
     }
 }
 
-void delete_all_student(ArrList *list){
-    ArrList_clear(list);  // clear all the student information from the array list 
+void delete_all_student(ArrList *list)
+{
+    ArrList_clear(list); // clear all the student information from the array list
 }
 
-
-
-
-void student_section(BinarySearchTree *booktree, BinaryTreeNode *bt,ArrList *list)
+void student_section(BinarySearchTree *booktree, BinaryTreeNode *bt, ArrList *list)
 {
     int a;
     char c;
@@ -303,24 +305,65 @@ void Check_book_storage(BinarySearchTree *booktree)
 {
     Book b1, return_book_information;
     printf("Enter book key (maxmimun six digits)\n");
-    scanf("%s", b1.key);
+    scanf("%d", &b1.key);
     return_book_information = BinarySearchTree_find(booktree, b1.key);
-    if (return_book_information.key != -1)
+    if (return_book_information.key == -1)
+    {
+        printf("Book is NOT found!!!! \n");
+    }
+    else
     {
         printf("book key :\t\t%d\n", return_book_information.key);
         printf("Book title :\t\t%s\n", return_book_information.title);
         printf("Book existing_stocks :\t\t%d\n", return_book_information.existing_stocks);
     }
-    else
-        printf("Book is NOT found!!!! \n");
 }
 
-void Borrow_book(BinarySearchTree *booktree)
+void Borrow_book(BinarySearchTree *booktree, ArrList *list)
 {
-    //printf("Enter your Student id");
+    int a;
+    STUDENT s;
+    Book b1;
+    BinaryTreeNode *book;
+    printf("Enter Student ID\n");
+    scanf("%d", &a);
+    for (int i = 0; i < ArrList_size(list); i++)
+    {
+        s = ArrList_get(list, i);
+        if (s.id == a)
+        {
+            printf("Enter book key (maxmimun six digits)\n");
+            scanf("%d", &b1.key);
+            book=BinarySearchTree_find_node(booktree->root,b1.key);
+            if(book->data.key==NULL){
+                printf("Book is not founded in Libaray\n");
+            }
+            else
+            {
+                if (book->data.existing_stocks>1)
+                {
+                    s.book_id = book->data.key;
+                    book->data.existing_stocks--;
+                    printf("Borrow done\n");
+                }
+                else
+                {
+                    printf("existing_stocks is not sufficient to Borrow this book \n");
+                }
+
+            }
+            
+        }
+        else
+        {
+            printf("This ID is not founded in resister.\n");
+        }
+    }
 }
 
-void book_issue_section(BinarySearchTree *booktree, BinaryTreeNode *bt)
+
+
+void book_issue_section(BinarySearchTree *booktree, BinaryTreeNode *bt, ArrList *list)
 {
     int a;
     char c;
@@ -331,7 +374,7 @@ void book_issue_section(BinarySearchTree *booktree, BinaryTreeNode *bt)
         printf("|  book section    |\n");
         printf(".........................\n\n");
 
-        printf("\t\t\tPress <1> Check Book Storage\n");
+        printf("\t\t\tPress <1> Check Book Exiting Storage\n");
         printf("\t\t\tPress <2> Borrow a Book\n");
         printf("\t\t\tPress <3> Return Book\n");
         printf("\t\t\tPress <4> Back to Main Menu\n");
@@ -342,10 +385,10 @@ void book_issue_section(BinarySearchTree *booktree, BinaryTreeNode *bt)
             Check_book_storage(booktree);
             break;
         case 2:
-            Borrow_Book(booktree);
+            Borrow_Book(booktree, list);
             break;
         case 3:
-            // Return_Book(booktree);
+            //Return_Book(booktree,list);
             break;
         case 4:
             // main_manu();
@@ -378,13 +421,13 @@ void main_manu(BinarySearchTree *booktree, BinaryTreeNode *bt, ArrList *list)
         switch (n)
         {
         case 1:
-            student_section(booktree, bt, list);  // done 100%
+            student_section(booktree, bt, list); // done 100%
             break;
         case 2:
-            book_section(booktree, bt, list);
+            book_section(booktree, bt, list); // done 100%
             break;
         case 3:
-            booK_issue_section(booktree, bt);
+            booK_issue_section(booktree, bt, list); //
             break;
         case 4:
             exit(0);
