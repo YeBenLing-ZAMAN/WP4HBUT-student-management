@@ -21,9 +21,10 @@ void book_insert_record(BinarySearchTree *booktree)
         scanf("%s", &b.author);
         b.existing_stocks = 1;
         BinarySearchTree_add(booktree, b);
-        printf("Enter any intger number for continuing insertion\n");
+        printf("\n");
+        printf("If you want to continue book insertion press <1> otherwise press <3>\n");
         scanf("%d", &x);
-    } while (x != 1);
+    } while (x == 1);
 }
 
 void book_searching(BinarySearchTree *booktree)
@@ -80,7 +81,7 @@ void delete_all_book(BinarySearchTree *booktree)
     delete_BinaryTree(booktree->root);
 }
 
-void book_section(BinarySearchTree *booktree,ArrList *list)
+void book_section(BinarySearchTree *booktree, ArrList *list)
 {
     int a;
     char c;
@@ -98,6 +99,7 @@ void book_section(BinarySearchTree *booktree,ArrList *list)
         printf("\t\t\tPress <4> To delete Book record (with all Existing stocks)\n");
         printf("\t\t\tPress <5> To DELETE ALL the BOOKS information for program\n");
         printf("\t\t\tPress <6> Back to Main Menu\n");
+        printf("Enter your chosen :\n");
         scanf("%d", &a);
         switch (a)
         {
@@ -117,7 +119,7 @@ void book_section(BinarySearchTree *booktree,ArrList *list)
             delete_all_book(booktree);
             break;
         case 6:
-            main_manu(booktree,list);
+            main_manu(booktree, list);
             break;
         default:
             printf("enter correct value\n");
@@ -134,14 +136,15 @@ void book_section(BinarySearchTree *booktree,ArrList *list)
 void student_insert_record(ArrList *list)
 {
     STUDENT s1;
-    static int first_student = 0;
-    printf("Enter student ID (mazmimun six digits)\n");
+    printf("Enter student ID (maxmimun six digits)\n");
     scanf("%d", &s1.id);
     printf("Enter student Name (Space not allowed)\n");
     scanf("%s", &s1.name);
     s1.book_id = 000000; // 0 means this student is the new member of library -> he don't take any book
-    printf("Enter your gender (1 for male, 0 for female)");
+    printf("Enter your gender (1 for male, 0 for female)\n");
     scanf("%d", &s1.gender);
+    printf("Enter your mobile numeber\n");
+    scanf("%d", &s1.mobile_number);
 
     ArrList_insert(list, 0, s1); // it's always insert 0 index/it's work like a stacks
 }
@@ -149,7 +152,7 @@ void student_insert_record(ArrList *list)
 void student_see_record(ArrList *list)
 {
     STUDENT b;
-    printf("\tStdent id\t\tStudent Name\t\t\t Borrow Book ID\t\tGender\n");
+    printf("\tStdent id\t\tStudent Name\t\t\t Borrow Book ID\t\tMobile number\t\tGender\n");
     printf("-----------------------------------------------------------------------------------------------------\n");
 
     for (int i = 0; i < ArrList_size(list); ++i)
@@ -158,6 +161,7 @@ void student_see_record(ArrList *list)
         printf("\t%-10d\t\t", b.id);
         printf("%-20s\t\t", b.name);
         printf(" %-9d\t\t", b.book_id);
+        printf("%-9d\t\t", b.mobile_number);
         if (b.gender == 1)
             printf("male");
         else
@@ -166,6 +170,7 @@ void student_see_record(ArrList *list)
     }
     printf("\n");
 }
+
 void delete_student_record(ArrList *list)
 {
     int a, flag = -1;
@@ -195,18 +200,19 @@ void search_student(ArrList *list)
 {
     int a;
     STUDENT b;
-    printf("Enter Student ID\n");
+    printf("Enter Student ID (maximum six digits)\n");
     scanf("%d", &a);
     for (int i = 0; i < ArrList_size(list); ++i)
     {
         b = ArrList_get(list, i);
         if (b.id == a)
         {
-            printf("\tStdent id\t\tStudent Name\t\t\t Borrow Book ID\t\tGender\n");
+            printf("\tStdent id\t\tStudent Name\t\t\t Borrow Book ID\t\tMobile number\t\tGender\n");
             printf("-----------------------------------------------------------------------------------------------------\n");
             printf("\t%-10d\t\t", b.id);
             printf("%-20s\t\t", b.name);
             printf(" %-9d\t\t", b.book_id);
+            printf("%-9d\t\t", b.mobile_number);
             if (b.gender == 1)
                 printf("male");
             else
@@ -227,11 +233,12 @@ void search_student_by_book_ID(ArrList *list)
         b = ArrList_get(list, i);
         if (b.book_id == a)
         {
-            printf("\tBorrow Book ID\t\tStdent id\t\t\t Student Name\t\tGender\n");
+            printf("\tStdent id\t\tStudent Name\t\t\t Borrow Book ID\t\tMobile number\t\tGender\n");
             printf("-----------------------------------------------------------------------------------------------------\n");
             printf("\t%-10d\t\t", b.book_id);
             printf("%-20s\t\t", b.id);
             printf(" %-9d\t\t", b.name);
+            printf("%-9d\t\t", b.mobile_number);
             if (b.gender == 1)
                 printf("male");
             else
@@ -248,8 +255,7 @@ void delete_all_student(ArrList *list)
 
 void student_section(BinarySearchTree *booktree, ArrList *list)
 {
-    int a;
-    char c;
+    int a, b;
     do
     {
 
@@ -260,11 +266,12 @@ void student_section(BinarySearchTree *booktree, ArrList *list)
 
         printf("\t\t\tPress <1> To insert Student Record\n");
         printf("\t\t\tPress <2> To see Student Record\n");
-        printf("\t\t\tPress <3> To delete record(By ID)d\n");
-        printf("\t\t\tPress <4> To search Student(By ID)\n");
+        printf("\t\t\tPress <3> To delete record(By Student ID)d\n");
+        printf("\t\t\tPress <4> To search Student(By Student ID)\n");
         printf("\t\t\tPress <5> To search_student(By Book Borrow ID)\n");
         printf("\t\t\tPress <6> To DELETE ALL student Record\n");
-        printf("\t\t\tPress <6> Back to main menu\n");
+        printf("\t\t\tPress <7> Back to main menu\n");
+        printf("Enter your chosen :\n");
         scanf("%d", &a);
         switch (a)
         {
@@ -286,19 +293,18 @@ void student_section(BinarySearchTree *booktree, ArrList *list)
         case 6:
             delete_all_student(list);
         case 7:
-            main_manu(booktree,list);
+            main_manu(booktree, list);
             break;
         default:
-            printf("enter correct value\n");
+            printf("Please Enter correct value\n");
         }
-
-        printf("Press <a> To continue with student section\n");
-        scanf("%c", &c);
-    } while (c == 'a');
+        printf("\n");
+        printf("Press <1> To continue with student section\n");
+        scanf("%d", &b);
+    } while (b == 1);
 }
 
 // ----------------------------------------------------------------
-
 // book issue section  first compelete student section
 
 void Check_book_storage(BinarySearchTree *booktree)
@@ -321,7 +327,7 @@ void Check_book_storage(BinarySearchTree *booktree)
 
 void Borrow_Book(BinarySearchTree *booktree, ArrList *list)
 {
-    int a,i;
+    int a, i;
     STUDENT s;
     Book b1;
     BinaryTreeNode *book;
@@ -334,13 +340,14 @@ void Borrow_Book(BinarySearchTree *booktree, ArrList *list)
         {
             printf("Enter book key (maxmimun six digits)\n");
             scanf("%d", &b1.key);
-            book=BinarySearchTree_find_node(booktree->root,b1.key);
-            if(book==NULL){
+            book = BinarySearchTree_find_node(booktree->root, b1.key);
+            if (book == NULL)
+            {
                 printf("Book is not founded in Libaray\n");
             }
             else
             {
-                if (book->data.existing_stocks>1)
+                if (book->data.existing_stocks > 1)
                 {
                     s.book_id = book->data.key;
                     book->data.existing_stocks--;
@@ -350,9 +357,7 @@ void Borrow_Book(BinarySearchTree *booktree, ArrList *list)
                 {
                     printf("Existing_stocks is not sufficient to Borrow this book \n");
                 }
-
             }
-            
         }
         else
         {
@@ -362,9 +367,9 @@ void Borrow_Book(BinarySearchTree *booktree, ArrList *list)
     }
 }
 
-
-void Return_Book(BinarySearchTree *booktree, ArrList *list){
-   int a;
+void Return_Book(BinarySearchTree *booktree, ArrList *list)
+{
+    int a;
     STUDENT s;
     Book b1;
     BinaryTreeNode *book;
@@ -375,29 +380,25 @@ void Return_Book(BinarySearchTree *booktree, ArrList *list){
         s = ArrList_get(list, i);
         if (s.id == a)
         {
-            if(s.book_id!=0){
-                book=BinarySearchTree_find_node(booktree->root,s.book_id);
+            if (s.book_id != 0)
+            {
+                book = BinarySearchTree_find_node(booktree->root, s.book_id);
                 book->data.existing_stocks++;
                 s.book_id = 0;
                 printf("Book Successfully retuned\n");
             }
-            else{
-                printf("you haven't any book due\n");
+            else
+            {
+                printf("You haven't any Book due\n");
             }
             printf(" %-9d\t\t", s.book_id);
-            
         }
     }
-
-
 }
-
-
 
 void booK_issue_section(BinarySearchTree *booktree, ArrList *list)
 {
-    int a;
-    char c;
+    int a, b;
     do
     {
         printf("\n");
@@ -409,6 +410,7 @@ void booK_issue_section(BinarySearchTree *booktree, ArrList *list)
         printf("\t\t\tPress <2> Borrow a Book\n");
         printf("\t\t\tPress <3> Return Book\n");
         printf("\t\t\tPress <4> Back to Main Menu\n");
+        printf("Enter your chosen :\n");
         scanf("%d", &a);
         switch (a)
         {
@@ -419,78 +421,85 @@ void booK_issue_section(BinarySearchTree *booktree, ArrList *list)
             Borrow_Book(booktree, list);
             break;
         case 3:
-            Return_Book(booktree,list);
+            Return_Book(booktree, list);
             break;
         case 4:
-            main_manu(booktree,list);
+            main_manu(booktree, list);
             break;
         default:
             printf("enter correct value\n");
         }
-        fflush(stdin);
-        printf("Press <a> To continue with book_issue_section\n\n");
-        printf("OR other key to main menu\n");
+        printf("Press <1> To continue with book_issue_section\n\n");
+        printf("OR Press <2> for main menu\n");
 
-        scanf("%c", &c);
-    } while (c == 'a');
+        scanf("%d", &b);
+    } while (b == 1);
 }
 
-void main_manu(BinarySearchTree *booktree,ArrList *list)
+void main_manu(BinarySearchTree *booktree, ArrList *list)
 {
-    int n;
-    char ch;
+    int n, b;
     do
     {
         printf("\n");
         printf(".........................\n");
         printf("|  LIBRARY MANAGEMENT    |\n");
+        printf("|                        |\n");
+        printf("|           for operater |\n");
         printf(".........................\n\n");
         printf("\nPress<1> For Student section\n");
         printf("Press<2> For Book section\n");
         printf("Press<3> For Book issue section\n");
         printf("Press<4> For To exit\n");
+        printf("Enter your chosen :\n");
         scanf("%d", &n);
         switch (n)
         {
         case 1:
-            student_section(booktree, list); // done 100%
+            student_section(booktree, list); 
             break;
         case 2:
-            book_section(booktree, list); // done 100%
+            book_section(booktree, list); 
             break;
         case 3:
-            booK_issue_section(booktree, list); //done 95%
+            booK_issue_section(booktree, list); 
             break;
         case 4:
             exit(0);
         default:
             printf("please enter correct choice\n");
         }
-        printf("For main menu press any key\n");
-        scanf("%c", &ch);
-    } while (ch != '-');
+        printf("\n");
+        printf("\n");
+        printf("Press <1> To continue with main menu\n");
+        printf("prees <2> for exit this program\n");
+        scanf("%d", &b);
+    } while (b == 1);
 }
 
 int main()
 {
 
-    char option, do_again;
-    int count = 0;
-    Book a, store_return_value;
     BinarySearchTree *booktree = new_BinarySearchTree();
-    BinaryTreeNode *bt;
     ArrList *list;
     list = new_ArrList();
-    BinaryTreeNode *return_node_for_delete;
     printf("\t\t\t###########################################################################");
     printf("\n\t\t\t############                                                   ############");
     printf("\n\t\t\t############      Library management System Project in C       ############");
     printf("\n\t\t\t############                                                   ############");
+    printf("\n\t\t\t############                         (BST and ArrList implementation)######");
     printf("\n\t\t\t###########################################################################");
     printf("\n\t\t\t---------------------------------------------------------------------------\n");
     printf("\n\t\t\t----------------------------------------------------------------------------");
+    printf("\n");
+    printf("\n");
     main_manu(booktree, list);
 
     getchar();
+
+    del_ArrList(list);
+    delete_BinarySearchTree(booktree);
+    exit(0);
+
     return 0;
 }

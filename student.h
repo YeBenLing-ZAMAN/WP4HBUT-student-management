@@ -7,6 +7,7 @@ typedef struct{
     char name[20];
     int book_id;
     int gender; //1 for male, 0 for female
+    int mobile_number;
     
 } STUDENT;
 
