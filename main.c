@@ -363,6 +363,36 @@ void Borrow_book(BinarySearchTree *booktree, ArrList *list)
 }
 
 
+void Return_Book(BinarySearchTree *booktree, ArrList *list){
+   int a;
+    STUDENT s;
+    Book b1;
+    BinaryTreeNode *book;
+    printf("Enter Student ID\n");
+    scanf("%d", &a);
+    for (int i = 0; i < ArrList_size(list); ++i)
+    {
+        s = ArrList_get(list, i);
+        if (s.id == a)
+        {
+            if(s.book_id!=0){
+                // book=BinarySearchTree_find_node(booktree->root,s.book_id);
+                // book->data.existing_stocks++;
+                // s.book_id = 0;
+                // printf("Book Successfully retuned\n");
+            }
+            else{
+                printf("you haven't any book due\n");
+            }
+            printf(" %-9d\t\t", s.book_id);
+            
+        }
+    }
+
+
+}
+
+
 
 void book_issue_section(BinarySearchTree *booktree, BinaryTreeNode *bt, ArrList *list)
 {
@@ -389,7 +419,7 @@ void book_issue_section(BinarySearchTree *booktree, BinaryTreeNode *bt, ArrList 
             Borrow_Book(booktree, list);
             break;
         case 3:
-            //Return_Book(booktree,list);
+            Return_Book(booktree,list);
             break;
         case 4:
             // main_manu();
