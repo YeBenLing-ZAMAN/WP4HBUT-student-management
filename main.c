@@ -344,11 +344,11 @@ void Borrow_book(BinarySearchTree *booktree, ArrList *list)
                 {
                     s.book_id = book->data.key;
                     book->data.existing_stocks--;
-                    printf("Borrow done\n");
+                    printf("Borrow Done\n");
                 }
                 else
                 {
-                    printf("existing_stocks is not sufficient to Borrow this book \n");
+                    printf("Existing_stocks is not sufficient to Borrow this book \n");
                 }
 
             }
@@ -356,7 +356,8 @@ void Borrow_book(BinarySearchTree *booktree, ArrList *list)
         }
         else
         {
-            printf("This ID is not founded in resister.\n");
+            printf("This Student ID is not founded in resister.\n");
+            printf("please resister first on libaray\n");
         }
     }
 }
