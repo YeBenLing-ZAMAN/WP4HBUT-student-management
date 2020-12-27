@@ -83,14 +83,13 @@ void delete_all_book(BinarySearchTree *booktree)
 
 void book_section(BinarySearchTree *booktree, ArrList *list)
 {
-    int a;
-    char c;
+    int a, c;
     do
     {
 
         printf("\n");
         printf(".........................\n");
-        printf("|  book section    |\n");
+        printf("|      Book section     |\n");
         printf(".........................\n\n");
 
         printf("\t\t\tPress <1> To insert Book in library record\n");
@@ -125,11 +124,11 @@ void book_section(BinarySearchTree *booktree, ArrList *list)
             printf("enter correct value\n");
         }
         fflush(stdin);
-        printf("Press <a> To continue with book section\n\n");
-        printf("OR other key to main menu\n");
+        printf("Press <1> To continue with book section\n\n");
+        printf("press <2> To move main menu\n");
 
-        scanf("%c", &c);
-    } while (c == 'a');
+        scanf("%d", &c);
+    } while (c == 1);
 }
 // ----------------------------------------------------------------
 
@@ -230,7 +229,7 @@ void search_student(ArrList *list)
 
 void search_student_by_book_ID(ArrList *list)
 {
-    int a;
+    int a,flag=0;
     STUDENT s;
     printf("Enter Book ID\n");
     scanf("%d", &a);
@@ -239,6 +238,7 @@ void search_student_by_book_ID(ArrList *list)
         s = ArrList_get(list, i);
         if (s.book_id == a)
         {
+            flag=1;
             printf("\tStdent id\t\tStudent Name\t\t\t Borrow Book ID\t\tMobile number\t\tGender\n");
             printf("-----------------------------------------------------------------------------------------------------\n");
             printf("\t%-10d\t\t", s.book_id);
@@ -251,7 +251,13 @@ void search_student_by_book_ID(ArrList *list)
                 printf("female");
             printf("\n");
         }
+        if (flag==0)
+        {
+            printf("This book is not borrow by anyone \n");
+        }
+        
     }
+
 }
 
 void delete_all_student(ArrList *list)
@@ -267,7 +273,7 @@ void student_section(BinarySearchTree *booktree, ArrList *list)
 
         printf("\n");
         printf(".........................\n");
-        printf("|  student section    |\n");
+        printf("|    student section    |\n");
         printf(".........................\n\n");
 
         printf("\t\t\tPress <1> To insert Student Record\n");
@@ -359,7 +365,7 @@ void Borrow_Book(BinarySearchTree *booktree, ArrList *list)
                 {
                     if (book->data.existing_stocks > 1)
                     {
-                        s.book_id = a;
+                        ArrList_update(list, i, b1.key);
                         book->data.existing_stocks--;
                         printf("Borrow Done\n");
                     }
@@ -384,7 +390,7 @@ void Borrow_Book(BinarySearchTree *booktree, ArrList *list)
 
 void Return_Book(BinarySearchTree *booktree, ArrList *list)
 {
-    int a, flag = 0;
+    int a, flag = 0, n=0; 
     STUDENT s;
     Book b1;
     BinaryTreeNode *book;
@@ -400,7 +406,7 @@ void Return_Book(BinarySearchTree *booktree, ArrList *list)
             {
                 book = BinarySearchTree_find_node(booktree->root, s.book_id);
                 book->data.existing_stocks++;
-                s.book_id = 0;
+                ArrList_update(list, i, n);
                 printf("Book Successfully retuned\n");
             }
             else
@@ -423,7 +429,7 @@ void booK_issue_section(BinarySearchTree *booktree, ArrList *list)
     {
         printf("\n");
         printf("..........................\n");
-        printf("|  book Issue section    |\n");
+        printf("|   Book Issue section   |\n");
         printf("..........................\n\n");
 
         printf("\t\t\tPress <1> Check Book Exiting Storage\n");
@@ -470,7 +476,7 @@ void main_manu(BinarySearchTree *booktree, ArrList *list)
         printf("\nPress<1> For Student section\n");
         printf("Press<2> For Book section\n");
         printf("Press<3> For Book issue section\n");
-        printf("Press<4> For To exit\n");
+        printf("Press<4> For To exit this program\n");
         printf("Enter your chosen :\n");
         scanf("%d", &n);
         switch (n)
@@ -492,7 +498,6 @@ void main_manu(BinarySearchTree *booktree, ArrList *list)
         printf("\n");
         printf("\n");
         printf("Press <1> To continue with main menu\n");
-        printf("prees <2> for exit this program\n");
         scanf("%d", &b);
     } while (b == 1);
 }

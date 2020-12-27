@@ -66,6 +66,13 @@ void ArrList_set(ArrList* list, int index, STUDENT elem){
     }
     list->data[index] = elem;
 }
+void ArrList_update(ArrList* list,int index, int a){
+      if(index < 0 || index > list->size - 1){
+        printf("Error: Bad index! list->size = %d, index = %d\n", list->size, index);
+        exit(1);
+    }
+    list->data[index].book_id = a;
+}
 
 void ArrList_clear(ArrList* list){
     list->size = 0;
