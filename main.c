@@ -59,12 +59,13 @@ void delete_book_record(BinarySearchTree *booktree)
     if (delete_node_address == NULL)
     {
         // node address Not founded
-        printf("Book is not Found by this id : %d", b.key);
+        printf("Book is not Found by this id : %d\n", b.key);
     }
     else
     {
         // node is not here
         BinarySearchTree_delete(booktree, delete_node_address);
+          printf("Book id : %d is delete suceesfully\n", b.key);
     }
 }
 
@@ -79,6 +80,7 @@ void see_all_book_records(BinarySearchTree *booktree)
 void delete_all_book(BinarySearchTree *booktree)
 {
     delete_BinaryTree(booktree->root);
+    printf("Successfully !! delete all the book information\n");
 }
 
 void book_section(BinarySearchTree *booktree, ArrList *list)
@@ -239,7 +241,7 @@ void search_student_by_book_ID(ArrList *list)
         if (s.book_id == a)
         {
             flag=1;
-            printf("\tStdent id\t\tStudent Name\t\t\t Borrow Book ID\t\tMobile number\t\tGender\n");
+            printf("\tStudent id\t\tStudent Name\t\t\t Borrow Book ID\t\tMobile number\t\tGender\n");
             printf("-----------------------------------------------------------------------------------------------------\n");
             printf("\t%-10d\t\t", s.book_id);
             printf("%-20s\t\t", s.id);
@@ -304,6 +306,7 @@ void student_section(BinarySearchTree *booktree, ArrList *list)
             search_student_by_book_ID(list);
         case 6:
             delete_all_student(list);
+            printf("successfully !! delete all the students information\n");
         case 7:
             main_manu(booktree, list);
             break;
@@ -377,7 +380,7 @@ void Borrow_Book(BinarySearchTree *booktree, ArrList *list)
             }
             else
             {
-                printf("You Already Borrow a Book. \t\t first you return pervious one than take new one \n");
+                printf("You Already Borrow a Book. \t--->>first you return pervious one than take new one \n");
             }
         }
     }
