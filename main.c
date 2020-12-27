@@ -125,7 +125,6 @@ void book_section(BinarySearchTree *booktree, ArrList *list)
         default:
             printf("enter correct value\n");
         }
-        fflush(stdin);
         printf("Press <1> To continue with book section\n\n");
         printf("press <2> To move main menu\n");
 
